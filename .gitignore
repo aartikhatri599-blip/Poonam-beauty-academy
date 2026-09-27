@@ -1,0 +1,25 @@
+# Old copy of the site from before the redesign (kept locally only)
+/poonam-beauty-academy/
+
+# Local tool settings
+/.claude/
+
+# Secrets — never commit real keys (site/.env.example with placeholders is fine)
+.env
+.env*.local
+
+# Dependencies and build output
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# Payload uploads stored locally
+/site/media/
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
