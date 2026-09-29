@@ -132,7 +132,7 @@ async function run() {
   await payload.updateGlobal({
     slug: 'site-photos',
     data: {
-      founderPortrait: await media(payload, 'poonam-mehla.png', 'Poonam Mehla, founder of Poonam Beauty Academy'),
+      founderPortrait: await media(payload, 'poonam-mehla.jpg', 'Poonam Mehla, founder of Poonam Beauty Academy'),
       heroBridal: await media(payload, 'bridal-1.jpg', 'HD bridal look'),
       founderStudio: await media(payload, 'studio-1.jpg', 'Poonam Mehla Makeover studio'),
       founderClass: await media(payload, 'class-1.jpg', 'Poonam Mehla with a bride and a student'),

@@ -24,7 +24,7 @@ export default async function AboutPage() {
     ? photos.studioTour.map((t) => ({ src: mediaUrl(t.image, 'card'), caption: t.caption || '' }))
     : DEFAULT_TOUR
   const serviceCount = services.reduce((n, s) => n + (s.items?.length || 0), 0)
-  const portrait = mediaUrl(photos.founderPortrait) || '/images/poonam-mehla.png'
+  const portrait = mediaUrl(photos.founderPortrait) || '/images/poonam-mehla.jpg'
   const tourPhoto = (i: number, fallback: string) => tour[i]?.src || fallback
   const followers = settings.stats?.instagramFollowers ?? 4000
   const posts = settings.stats?.postsShared ?? 970
@@ -51,9 +51,10 @@ export default async function AboutPage() {
           </div>
           <div className="about-collage reveal" aria-hidden="true">
             <div className="ac-ring" />
-            <Photo src={mediaUrl(photos.bridalPortfolio?.[0]?.image, 'card') || '/images/bridal-6.jpg'} caption="Poonam Mehla Makeover" className="arch ac-main" keepCaption posTop />
+            {/* Main arch: the owner at her studio; the bride sits in the round frame */}
+            <Photo src="/images/poonam-mehla-portrait.jpg" caption="Poonam Mehla · Founder" className="arch ac-main ac-owner" keepCaption posTop />
             <Photo src={tourPhoto(4, '/images/counselling-1.jpg')} caption="Admission counselling" className="ac-card" keepCaption posTop />
-            <Photo src={portrait} className="ac-circle" />
+            <Photo src={mediaUrl(photos.bridalPortfolio?.[0]?.image, 'card') || '/images/bridal-6.jpg'} className="ac-circle ac-bride" />
           </div>
         </div>
       </section>

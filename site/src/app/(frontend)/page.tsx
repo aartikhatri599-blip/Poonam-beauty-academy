@@ -23,7 +23,7 @@ export default async function HomePage() {
     getSettings(), getPhotos(), getCourses(), getServiceCategories(), getReviews(3),
   ])
   const links = toSiteLinks(settings)
-  const portrait = mediaUrl(photos.founderPortrait) || '/images/poonam-mehla.png'
+  const portrait = mediaUrl(photos.founderPortrait) || '/images/poonam-mehla.jpg'
   const portfolio = photos.bridalPortfolio?.length
     ? photos.bridalPortfolio.map((p) => ({ src: mediaUrl(p.image, 'card'), caption: p.caption || '' }))
     : DEFAULT_PORTFOLIO

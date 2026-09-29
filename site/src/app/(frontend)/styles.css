@@ -1222,6 +1222,8 @@ footer{ position:relative; overflow:hidden; }
 .about-collage .ac-card .ph-cap{ font-size:11px; margin:8px; }
 .about-collage .ac-circle{ left:0; bottom:6%; width:36%; aspect-ratio:1; border-radius:50%; z-index:3; box-shadow:0 0 0 5px #F7C6B5, 0 0 0 12px rgba(247,198,181,.2), 0 20px 40px rgba(20,8,20,.5); }
 .about-collage .ac-circle > img.photo{ object-position:50% 40%; }
+.about-collage .ac-main.ac-owner > img.photo{ object-position:50% 20%; }
+.about-collage .ac-circle.ac-bride > img.photo{ object-position:50% 18%; }
 @media (max-width:767px){ .about-collage .ph.ac-main.keep-cap .ph-cap{ display:none; } }
 
 .story-grid{ display:grid; gap:48px; align-items:center; }

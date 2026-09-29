@@ -1287,7 +1287,6 @@ footer{ position:relative; overflow:hidden; }
 .hero-mosaic-tint{ position:absolute; inset:0; z-index:-2; pointer-events:none; background:
   linear-gradient(90deg, rgba(58,32,60,.95) 0%, rgba(62,34,64,.88) 42%, rgba(66,38,68,.7) 70%, rgba(66,38,68,.62) 100%),
   linear-gradient(180deg, rgba(58,32,60,.55), transparent 28%, transparent 72%, rgba(58,32,60,.9)); }
-@media (max-width:899px){ .hero-mosaic-tint{ background:linear-gradient(180deg, rgba(58,32,60,.92), rgba(62,34,64,.84) 50%, rgba(58,32,60,.93)); } }
 .p-hero.has-mosaic > .wrap{ position:relative; }
 /* Floating round photo bubbles around the hero visuals */
 .hero-bubble{ position:absolute; z-index:4; width:clamp(64px,7vw,92px); aspect-ratio:1; border-radius:50%; background:#4A2C4B center/cover no-repeat;
@@ -1301,6 +1300,18 @@ footer{ position:relative; overflow:hidden; }
 .about-collage .hero-bubble.b2{ bottom:4%; right:-4%; }
 @media (max-width:599px){ .svc-hero-visual .hero-bubble.b1, .about-collage .hero-bubble.b1{ right:0; } .about-collage .hero-bubble.b2{ right:0; } }
 @media (prefers-reduced-motion:reduce){ .hm-track, .hero-bubble{ animation:none; } }
+
+/* Phones & tablets: lighter tint so hero background photos show like on desktop; soft text shadow keeps text readable */
+@media (max-width:899px){
+  .hh-bgphoto::after, .rv-hero-bg::after, .ct-hero-bg::after, .hero-mosaic-tint{
+    background:linear-gradient(180deg, rgba(58,32,60,.72) 0%, rgba(62,34,64,.5) 40%, rgba(62,34,64,.4) 70%, rgba(58,32,60,.8) 100%); }
+  .hh-bgphoto::after{ background:linear-gradient(180deg, rgba(50,26,52,.86) 0%, rgba(56,30,58,.76) 45%, rgba(56,30,58,.66) 75%, rgba(50,26,52,.9) 100%); }
+  .home-hero .crs-bg .orb{ opacity:.18; }
+  .hero-mosaic{ opacity:1; }
+  /* text-shadow breaks gradient-filled words, so headings get a drop-shadow filter instead */
+  :is(.home-hero, .rv-hero, .ct-hero, .has-mosaic) :is(.lead, .hero2-sub, .crumbs){ text-shadow:0 2px 12px rgba(40,18,42,.9), 0 1px 3px rgba(40,18,42,.7); }
+  :is(.home-hero, .rv-hero, .ct-hero, .has-mosaic) h1{ filter:drop-shadow(0 2px 8px rgba(40,18,42,.75)); }
+}
 
 /* ===== Contact page ===== */
 .ct-hero{ position:relative; overflow:hidden; isolation:isolate; padding:64px 0 80px; }
@@ -1416,7 +1427,6 @@ footer{ position:relative; overflow:hidden; }
 .rv-hero-bg::after{ content:""; position:absolute; inset:0; background:
   linear-gradient(90deg, rgba(58,32,60,.95) 0%, rgba(62,34,64,.86) 40%, rgba(74,44,75,.45) 72%, rgba(74,44,75,.3) 100%),
   linear-gradient(180deg, rgba(58,32,60,.4), transparent 30%, transparent 70%, rgba(58,32,60,.85)); }
-@media (max-width:899px){ .rv-hero-bg::after{ background:linear-gradient(180deg, rgba(58,32,60,.9), rgba(62,34,64,.82) 55%, rgba(58,32,60,.93)); } }
 .rv-hero .crs-bg{ z-index:-1; }
 .rv-hero .crs-watermark{ right:auto; left:-1%; bottom:-8%; }
 .rv-qmark{ position:absolute; right:6%; top:6%; font:italic 700 clamp(160px,22vw,300px)/1 var(--serif); color:transparent; -webkit-text-stroke:1.5px rgba(247,198,181,.45); pointer-events:none; animation:shBob 7s ease-in-out infinite alternate; }
@@ -1477,6 +1487,32 @@ footer{ position:relative; overflow:hidden; }
 /* Closing CTA photo */
 .rv-cta .gal-cta-bg::before{ background-image:url("https://images.unsplash.com/photo-1769618096517-22cba6779c7b?auto=format&fit=crop&w=1800&q=70"); background-position:center 30%; }
 @media (prefers-reduced-motion:reduce){ .rv-hero-bg::before, .rv-qmark{ animation:none; } }
+
+/* ===== Student review cards (text first, student's name below) ===== */
+.sr-grid{ display:grid; gap:22px; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); }
+.sr-card{ position:relative; overflow:hidden; display:flex; flex-direction:column; gap:18px; padding:30px 26px 22px; border-radius:26px;
+  background:linear-gradient(160deg, rgba(247,198,181,.1), rgba(199,164,255,.06)); border:1px solid rgba(247,198,181,.28); box-shadow:0 18px 40px rgba(20,8,20,.3);
+  transition:transform .35s, border-color .35s, box-shadow .35s; }
+.sr-card:hover{ transform:translateY(-5px); border-color:rgba(247,198,181,.6); box-shadow:0 26px 50px rgba(20,8,20,.4); }
+.sr-card::before{ content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--grad); }
+.sr-quote{ position:absolute; right:18px; top:-10px; font:italic 700 120px/1 var(--serif); color:rgba(247,198,181,.16); pointer-events:none; }
+.sr-text{ position:relative; margin:0; font:italic 400 17px/1.65 var(--serif); color:#F4EAF2; flex:1; }
+.sr-who{ display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid rgba(247,198,181,.22); }
+.sr-avatar{ width:44px; height:44px; flex:none; border-radius:50%; display:grid; place-items:center; font:700 18px/1 var(--serif); color:#4A2C4B; background:var(--grad); box-shadow:0 0 0 3px rgba(247,198,181,.2); }
+.sr-who b{ display:block; font:600 16px/1.25 var(--sans); color:#fff; }
+.sr-who span:not(.sr-avatar):not(.sr-badge){ display:block; font-size:13px; color:var(--muted); margin-top:2px; }
+.sr-badge{ align-self:flex-start; display:inline-flex; align-items:center; gap:5px; padding:5px 10px; border-radius:999px; font:700 10.5px/1 var(--sans); letter-spacing:.3px; color:#9FEBC8; background:rgba(127,224,181,.12); border:1px solid rgba(127,224,181,.35); }
+.sr-badge .i{ width:12px; height:12px; }
+.sr-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding-right:40px; }
+.sr-top .stars{ color:#F5C04A; }
+.sr-area{ display:block; font-size:12px; color:#F7C6B5; margin-top:2px; }
+.sr-text{ font-size:16px; }
+.sr-empty{ grid-column:1 / -1; max-width:620px; margin:0 auto; text-align:center; padding:34px 28px; border-radius:28px; display:flex; flex-direction:column; align-items:center; gap:10px;
+  background:linear-gradient(160deg, rgba(247,198,181,.12), rgba(199,164,255,.08)); border:1px dashed rgba(247,198,181,.5); }
+.sr-empty-ico{ width:60px; height:60px; border-radius:50%; display:grid; place-items:center; background:var(--grad); color:#4A2C4B; box-shadow:0 0 0 8px rgba(247,198,181,.14); }
+.sr-empty-ico .i{ width:26px; height:26px; }
+.sr-empty b{ font:600 22px/1.25 var(--serif); color:#fff; }
+.sr-empty p{ margin:0 0 8px; color:var(--muted); max-width:44ch; }
 
 /* ===== Reviews page: success story videos ===== */
 #stories{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:20px; max-width:1120px; margin:0 auto; }
@@ -1565,6 +1601,10 @@ footer{ position:relative; overflow:hidden; }
 /* Instagram block */
 .gal-ig .gal-ig-head{ padding:18px 22px; border-radius:24px; background:linear-gradient(135deg, rgba(247,198,181,.12), rgba(199,164,255,.1)); border:1px solid rgba(247,198,181,.25); }
 .gal-ig .ig-handle b{ color:#fff; font-size:17px; }
+/* Long Instagram handle must be allowed to wrap on phones (it was pushing the page sideways) */
+.ig-handle, .ig-handle > div{ min-width:0; }
+.ig-handle b{ overflow-wrap:anywhere; }
+@media (max-width:479px){ .gal-ig .gal-ig-head{ padding:16px; } .gal-ig .ig-handle b{ font-size:15px; } .gal-ig .ig-av{ width:48px; height:48px; flex:none; } }
 
 /* Lightbox */
 dialog.lb{ max-width:min(94vw,720px); }
@@ -1595,14 +1635,21 @@ dialog.lb .icon-btn{ z-index:4; }
 /* Home hero: glass location pill, drawn underline, trust chips, orbit ring, seal and sparkles */
 .home-hero{ isolation:isolate; }
 .hh-bgphoto{ position:absolute; inset:0; overflow:hidden; }
-.hh-bgphoto::before{ content:""; position:absolute; inset:-4%; background:url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=70") center 40%/cover no-repeat;
-  animation:hhZoom 26s ease-in-out infinite alternate; }
+.hh-bgphoto::before{ content:""; position:absolute; inset:-6%; background:url("https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1800&q=70") center 40%/cover no-repeat;
+  animation:hhDrift 22s ease-in-out infinite; will-change:transform; }
+/* Home hero: slow "Ken Burns" drift — gentle zoom while panning in a loop */
+@keyframes hhDrift{
+  0%  { transform:scale(1.04) translate(0, 0); }
+  25% { transform:scale(1.10) translate(-2.2%, -1.2%); }
+  50% { transform:scale(1.13) translate(1.8%, -2%); }
+  75% { transform:scale(1.09) translate(2.2%, 1.2%); }
+  100%{ transform:scale(1.04) translate(0, 0); } }
 .hh-bgphoto::after{ content:""; position:absolute; inset:0; background:
   linear-gradient(90deg, rgba(58,32,60,.93) 0%, rgba(66,38,68,.84) 42%, rgba(74,44,75,.62) 70%, rgba(74,44,75,.72) 100%),
   linear-gradient(180deg, rgba(58,32,60,.35), transparent 30%, transparent 70%, rgba(58,32,60,.75)); }
 @keyframes hhZoom{ to{ transform:scale(1.08) translateX(-1.5%); } }
-@media (max-width:899px){ .hh-bgphoto::after{ background:linear-gradient(180deg, rgba(58,32,60,.88), rgba(66,38,68,.8) 55%, rgba(58,32,60,.9)); } }
-@media (prefers-reduced-motion:reduce){ .hh-bgphoto::before{ animation:none; } }
+/* Reduced-motion users still get a much slower, smaller drift (no fast movement) */
+@media (prefers-reduced-motion:reduce){ .hh-bgphoto::before{ animation:hhZoom 40s ease-in-out infinite alternate; } }
 .home-hero .crs-watermark{ right:auto; left:-1%; bottom:-4%; }
 .hh-pill{ gap:8px; padding:8px 16px; border-radius:999px; letter-spacing:1.2px; background:rgba(255,255,255,.07); border:1px solid rgba(247,198,181,.4); backdrop-filter:blur(6px); }
 .hh-pill::before{ display:none !important; }
@@ -1775,6 +1822,8 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
 .about-collage .ac-card .ph-cap{ font-size:11px; margin:8px; }
 .about-collage .ac-circle{ left:0; bottom:6%; width:36%; aspect-ratio:1; border-radius:50%; z-index:3; box-shadow:0 0 0 5px #F7C6B5, 0 0 0 12px rgba(247,198,181,.2), 0 20px 40px rgba(20,8,20,.5); }
 .about-collage .ac-circle > img.photo{ object-position:50% 40%; }
+.about-collage .ac-main.ac-owner > img.photo{ object-position:50% 20%; }
+.about-collage .ac-circle.ac-bride > img.photo{ object-position:50% 18%; }
 @media (max-width:767px){ .about-collage .ph.ac-main.keep-cap .ph-cap{ display:none; } }
 
 .story-grid{ display:grid; gap:48px; align-items:center; }
@@ -1955,7 +2004,7 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
           <a class="btn btn-light" data-wa="Hi! I'd like to know more about your beauty courses." target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg><span data-i18n="cta_wa">Chat on WhatsApp</span></a>
         </div>
         <a href="#founder" class="founder-row" data-scroll="founder">
-          <span class="ph founder-avatar" data-photo="images/poonam-mehla.png"><span class="mono">PM</span></span>
+          <span class="ph founder-avatar" data-photo="images/poonam-mehla.jpg"><span class="mono">PM</span></span>
           <span><small>Founded &amp; taught by</small><b>Poonam Mehla</b><span>Makeup Artist · Founder &amp; Lead Trainer</span></span>
         </a>
       </div>
@@ -1970,7 +2019,7 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
           <text x="60" y="68" text-anchor="middle" class="seal-star">✦</text>
         </svg>
         <span class="sh-spark s1" aria-hidden="true">✦</span><span class="sh-spark s2" aria-hidden="true">✦</span><span class="sh-spark s3" aria-hidden="true">✦</span>
-        <div class="ph arch hero2-photo" data-photo="images/poonam-mehla.png">
+        <div class="ph arch hero2-photo" data-photo="images/poonam-mehla.jpg">
           <div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Photo: Poonam Mehla</span>
         </div>
         <div class="ph hero2-mini float" data-photo="images/bridal-1.jpg">
@@ -2039,7 +2088,7 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
         <div class="founder-ring" aria-hidden="true"></div>
         <div class="ph t2 m2 keep-cap" data-photo="images/studio-1.jpg"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Poonam Mehla Makeover studio</span></div>
         <div class="ph t3 m3 keep-cap pos-top" data-photo="images/class-1.jpg"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Bridal prep with students</span></div>
-        <div class="ph m1" data-photo="images/poonam-mehla.png"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Poonam Mehla</span></div>
+        <div class="ph m1" data-photo="images/poonam-mehla.jpg"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Poonam Mehla</span></div>
         <div class="founder-badge"><b>Poonam Mehla</b><span>Founder &amp; Lead Trainer</span></div>
       </div>
       <div class="reveal">
@@ -2110,10 +2159,10 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
   <section class="sec">
     <div class="wrap">
       <div class="sec-head reveal" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px">
-        <div><span class="eyebrow">Google reviews</span><h2 style="margin:0">What our students say</h2></div>
+        <div><span class="eyebrow">Student reviews</span><h2 style="margin:0">What our students say</h2></div>
         <div class="btn-row"><a href="#/reviews" class="link-arrow">Read all reviews <svg class="i"><use href="#i-arrow"/></svg></a></div>
       </div>
-      <div class="rv-grid" id="homeReviews"></div>
+      <div class="rv-grid sr-grid" id="homeReviews"></div>
     </div>
   </section>
 
@@ -2173,9 +2222,10 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
       <div class="about-collage reveal" aria-hidden="true">
         <div class="ac-ring"></div>
         <span class="hero-bubble b1" data-bubble="about:0"></span><span class="hero-bubble b2" data-bubble="about:1"></span>
-        <div class="ph arch ac-main keep-cap pos-top" data-photo="images/bridal-6.jpg"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Poonam Mehla Makeover</span></div>
+        <!-- Main arch: the owner at her studio; the bride now sits in the round frame -->
+        <div class="ph arch ac-main ac-owner keep-cap pos-top" data-photo="images/poonam-mehla-portrait.jpg"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Poonam Mehla · Founder</span></div>
         <div class="ph ac-card keep-cap pos-top" data-photo="images/counselling-1.jpg"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div><span class="ph-cap">Admission counselling</span></div>
-        <div class="ph ac-circle" data-photo="images/poonam-mehla.png"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div></div>
+        <div class="ph ac-circle ac-bride" data-photo="images/bridal-6.jpg"><div class="ph-ico"><svg class="i"><use href="#i-img"/></svg></div></div>
       </div>
     </div>
   </section>
@@ -2195,7 +2245,7 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
         <p>Students learn inside a working studio, on the same bridal, party and hair looks Poonam creates for her own clients and shares every week with thousands of followers on Instagram and YouTube.</p>
         <p>The goal is simple: help women in Sonipat and nearby towns turn their love of beauty into a skill they can earn from — as a freelancer, in a salon, or in a parlour of their own.</p>
         <div class="signature">
-          <span class="ph sig-avatar" data-photo="images/poonam-mehla.png"><span class="mono">PM</span></span>
+          <span class="ph sig-avatar" data-photo="images/poonam-mehla.jpg"><span class="mono">PM</span></span>
           <div><b class="sig-name">Poonam Mehla</b><span>Founder &amp; Lead Trainer</span></div>
         </div>
         <div class="btn-row">
@@ -2700,7 +2750,7 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
       <p class="lead">Real stories and honest feedback from the women who learn and glam up at our Kache Quarter studio in Sonipat.</p>
       <div class="rv-hero-tiles">
         <a href="#/" data-scroll="rvStories"><span class="ci"><svg class="i"><use href="#i-play"/></svg></span><span><b>Video stories</b><small>Watch them talk</small></span></a>
-        <a href="#/" data-scroll="rvGoogle"><span class="ci g"><span class="g-logo"><span>G</span></span></span><span><b>Google reviews</b><small>What people say</small></span></a>
+        <a href="#/" data-scroll="rvGoogle"><span class="ci"><svg class="i"><use href="#i-heart"/></svg></span><span><b>Student reviews</b><small>In their own words</small></span></a>
         <a data-ig target="_blank" rel="noopener"><span class="ci"><svg class="i"><use href="#i-ig"/></svg></span><span><b>Instagram</b><small>@poonam__beauty_academy</small></span></a>
       </div>
       <div class="btn-row mt-24">
@@ -2730,21 +2780,16 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
     </div>
   </section>
 
-  <!-- Google rating + reviews -->
+  <!-- Student reviews (added by hand) -->
   <section class="sec rv-google" id="rvGoogle">
     <div class="wrap">
-      <div class="big-rating rv-rating reveal">
-        <span class="rv-rating-g"><span class="g-logo"><span>G</span></span></span>
-        <div class="rv-rating-score"><div class="score" data-rating-score>★</div></div>
-        <div class="rv-rating-text"><b>Google reviews</b><div class="small" data-rating-count>Live rating appears here once the Google Business Profile is connected.</div></div>
-        <a class="btn btn-primary" data-review target="_blank" rel="noopener"><svg class="i"><use href="#i-star"/></svg>Write a review on Google</a>
+      <div class="sec-head center reveal">
+        <span class="eyebrow">Student reviews</span>
+        <h2>In our students' own words</h2>
+        <div class="ornament" aria-hidden="true"><span></span><svg class="i"><use href="#i-heart"/></svg><span></span></div>
+        <p class="lead small">Honest feedback from women who trained with Poonam Mehla at our Kache Quarter studio.</p>
       </div>
-      <div class="sec-head center mt-40 reveal">
-        <span class="eyebrow">Google reviews</span>
-        <h2>What people say about us</h2>
-        <div class="ornament" aria-hidden="true"><span></span><svg class="i"><use href="#i-star"/></svg><span></span></div>
-      </div>
-      <div class="rv-grid" id="allReviews"></div>
+      <div class="rv-grid sr-grid" id="allReviews"></div>
     </div>
   </section>
 
@@ -2888,7 +2933,7 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
   <section class="sec ct-faq-sec">
     <div class="wrap ct-faq-grid">
       <aside class="ct-ask reveal">
-        <div class="ph ct-ask-photo pos-top" data-photo="images/poonam-mehla.png"><span class="mono">PM</span></div>
+        <div class="ph ct-ask-photo pos-top" data-photo="images/poonam-mehla.jpg"><span class="mono">PM</span></div>
         <b>Still have a question?</b>
         <p class="small">Poonam Mehla and the team reply on WhatsApp — ask about fees, batches or bookings.</p>
         <a class="btn btn-primary" data-wa="Hi Poonam ma'am! I have a question about " target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg>Ask on WhatsApp</a>
@@ -3126,14 +3171,16 @@ const GAL_WALL = ['1677691257363-eebd2abeafec','1713824096348-c1956e6da321','160
   '1647004692483-c5d942fe1137','1684868268327-7e5590bcfbd6','1700760934268-8aa0ef52ce0a','1629332791128-58f00882964d',
   '1717160675643-53a7a2ebaa9f','1608558070426-e4e9b1c954d2','1587271598589-3f91d0872f66','1640263192162-20091da26066'];
 
-// Placeholder reviews — replace with live Google reviews (Places API) before launch
-const REVIEWS = [
-  ['Student name','Advanced Bridal','Review text from Google will appear here. Ask recent students to mention the course they took and what they can do now.'],
-  ['Student name','Basic Beauty Culture','Review text from Google will appear here. Short, specific reviews about practical training work best.'],
-  ['Student name','Nail Art Masterclass','Review text from Google will appear here. Encourage alumni to add photos of their work.'],
-  ['Student name','Advanced Bridal','Review text from Google will appear here.'],
-  ['Student name','Basic Beauty Culture','Review text from Google will appear here.'],
-  ['Student name','Nail Art Masterclass','Review text from Google will appear here.'],
+// Reviews from real students, added by hand. One line per review:
+//   ['Student name', 'Course they took', 'What they said', stars 1–5, 'Area (optional)'],
+// Only add reviews students actually gave (with their permission to show their name).
+const STUDENT_REVIEWS = [
+  ['Pooja Sharma', 'Professional Makeup Artistry Course', "Poonam Beauty Academy is hands down the best place in Sonipat to learn professional makeup. Poonam Ma'am and the team taught everything from subtle party looks to high-definition bridal glam with immense patience. The extensive live-model practice gave me the confidence to take on freelance bridal bookings right after graduation.", 5, 'Sonipat'],
+  ['Simran Kaur', 'Advanced Hair Styling & Treatments', 'I enrolled for hair styling and chemical treatments (Keratin, Botox, Smoothening) at Poonam Beauty Academy, Sonipat. The academy emphasizes hands-on practical work over plain theory. The techniques taught here match current industry trends—truly top-notch training in our city.', 5, 'Model Town, Sonipat'],
+  ['Neha Verma', 'Diploma in Cosmetology', 'Completing the 6-month Cosmetology Diploma at Poonam Beauty Academy laid a solid foundation for my career. From advanced skin treatments and hygiene standards to salon management, everything was covered thoroughly. Today, I proudly run my own salon in Sonipat.', 5, 'Sonipat'],
+  ['Tanvi Patil', 'Nail Art & Extension Masterclass', 'The nail extension and 3D nail art training at Poonam Beauty Academy exceeded my expectations. They provide premium international tools and products for practice, and the personalized mentorship helped me build a professional portfolio before the batch even ended.', 5, 'Sector 14, Sonipat'],
+  ['Anjali Gupta', 'Bridal Makeup & Saree Draping', 'The bridal masterclass at Poonam Beauty Academy proved to be a real game changer for my freelancing speed. Learning flawless HD base techniques alongside modern saree and dupatta draping tricks made handling high-pressure wedding seasons effortless.', 5, 'Murthal Road, Sonipat'],
+  ['Riya Sen', 'Self-Grooming & Daily Makeup', "I joined Poonam Beauty Academy's weekend self-grooming batch to understand makeup for everyday office wear and family events. The environment is supportive, beginner-friendly, and perfect for anyone looking to refine their personal style.", 5, 'Sonipat'],
 ];
 // Success story videos (the academy's own WhatsApp videos, stored in /videos)
 const STORIES = ['videos/story-1.mp4', 'videos/story-2.mp4', 'videos/story-3.mp4', 'videos/story-4.mp4'];
@@ -3202,15 +3249,29 @@ function courseCard(c, i){
       </div>
     </div></article>`;
 }
-// Review: [name, course/service, text, stars]. Add the 4th value (1–5) for a real Google review; without it the card shows as a placeholder.
-function reviewCard(r, i){
-  const real = typeof r[3] === 'number';
-  return `<article class="rv reveal">${real ? '' : '<span class="tag-ph">Placeholder</span>'}
-    <span class="stars">${icon('star').repeat(real ? r[3] : 5)}</span>
-    <p>“${esc(r[2])}”</p>
-    <div class="who"><span class="avatar">${esc(r[0][0])}</span><div><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div><span class="g-logo"><span>G</span></span></div>
+// Student review card: the review text first, the student's name (and course) listed below it
+function reviewCard(r){
+  const [name, course, text, stars, area] = r;
+  return `<article class="sr-card reveal">
+    <span class="sr-quote" aria-hidden="true">&ldquo;</span>
+    <div class="sr-top"><span class="sr-badge"><svg class="i"><use href="#i-heart"/></svg>Our student</span>${stars ? `<span class="stars" aria-label="${stars} out of 5 stars">${icon('star').repeat(stars)}</span>` : ''}</div>
+    <p class="sr-text">${esc(text)}</p>
+    <div class="sr-who">
+      <span class="sr-avatar">${esc((name || '?').trim()[0] || '?')}</span>
+      <div><b>${esc(name)}</b>${area ? `<small class="sr-area">${esc(area)}</small>` : ''}${course ? `<span>${esc(course)}</span>` : ''}</div>
+    </div>
   </article>`;
 }
+// Shown until the first real review is added
+function reviewsEmpty(){
+  return `<div class="sr-empty reveal">
+    <span class="sr-empty-ico"><svg class="i"><use href="#i-heart"/></svg></span>
+    <b>Student reviews are on their way</b>
+    <p class="small">We're collecting reviews from our students. Studied with us? We'd love to hear from you.</p>
+    <a class="btn btn-primary" href="${waLink("Hi! I'm a student of Poonam Beauty Academy and I'd like to share my review: ")}" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg>Share your review on WhatsApp</a>
+  </div>`;
+}
+const reviewsHTML = n => STUDENT_REVIEWS.length ? STUDENT_REVIEWS.slice(0, n).map(reviewCard).join('') : reviewsEmpty();
 const GAL_SHAPES = ['4/5', '3/4', '1/1', '2/3', '4/5', '5/6'];
 function galItem(g, i, n){
   return `<button class="g-item gm-item reveal" data-cat="${esc(g[0])}" data-i="${i}" aria-label="Open ${esc(g[1])}" style="--d:${(n % 4) * 70}ms">
@@ -3284,7 +3345,7 @@ function courseDetail(c){
 
   <section class="sec"><div class="wrap">
     <div class="sec-head"><span class="eyebrow">Reviews</span><h2>From our alumni</h2></div>
-    <div class="rv-grid">${REVIEWS.slice(0, 3).map(reviewCard).join('')}</div>
+    <div class="rv-grid sr-grid">${reviewsHTML(3)}</div>
   </div></section>
 
   <section class="sec dark cta-band" id="cd-form"><div class="wrap cta-grid">
@@ -3296,8 +3357,8 @@ function courseDetail(c){
 
 /* ---------- build static lists ---------- */
 $('#homeCourses').innerHTML = COURSES.map(courseCard).join('');
-$('#homeReviews').innerHTML = REVIEWS.slice(0, 3).map(reviewCard).join('');
-$('#allReviews').innerHTML = REVIEWS.map(reviewCard).join('');
+$('#homeReviews').innerHTML = reviewsHTML(3);
+$('#allReviews').innerHTML = reviewsHTML(999);
 $('#footCourses').innerHTML = COURSES.map(c => `<li><a href="#/courses/${c.id}">${esc(c.name)}</a></li>`).join('');
 $('#stories').innerHTML = STORIES.map((src, i) => `<article class="story-card reveal">
   <div class="story-frame">
