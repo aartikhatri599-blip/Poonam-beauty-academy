@@ -1488,6 +1488,11 @@ footer{ position:relative; overflow:hidden; }
 .rv-cta .gal-cta-bg::before{ background-image:url("https://images.unsplash.com/photo-1769618096517-22cba6779c7b?auto=format&fit=crop&w=1800&q=70"); background-position:center 30%; }
 @media (prefers-reduced-motion:reduce){ .rv-hero-bg::before, .rv-qmark{ animation:none; } }
 
+/* Footer credit */
+.made-by b{ color:#F7C6B5; font-weight:600; }
+.made-by span{ color:#EFA3B5; }
+@media (max-width:599px){ .f-bottom{ flex-direction:column; align-items:center; text-align:center; } }
+
 /* ===== Student review cards (text first, student's name below) ===== */
 .sr-grid{ display:grid; gap:22px; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); }
 .sr-card{ position:relative; overflow:hidden; display:flex; flex-direction:column; gap:18px; padding:30px 26px 22px; border-radius:26px;
@@ -3002,7 +3007,7 @@ a.lp-node:hover{ transform:translateY(-5px); box-shadow:0 24px 48px rgba(20,8,20
       <div><h4>Courses</h4><ul id="footCourses"></ul></div>
       <div><h4>Visit</h4><ul><li>Kache Quarter, Sonipat, Haryana</li><li data-hours></li><li><a data-tel data-tel-text></a></li><li><a data-dir target="_blank" rel="noopener">Get directions →</a></li><li><a data-review target="_blank" rel="noopener">Leave a Google review →</a></li></ul></div>
     </div>
-    <div class="f-bottom"><span>© <span id="yr"></span> Poonam Beauty Academy, Sonipat</span><span><a href="#/contact">Privacy</a></span></div>
+    <div class="f-bottom"><span>© <span id="yr"></span> Poonam Beauty Academy, Sonipat</span><span class="made-by">Made with <span aria-hidden="true">♥</span> by <b>Aarti Khatri</b></span><span><a href="#/contact">Privacy</a></span></div>
   </div>
 </footer>
 
