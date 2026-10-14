@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap for search engines. The site is a single page (sections load via #/about etc.),
+     so only the main URL is listed. Switch the address to https://poonambeautyacademy.in once the domain is live. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://poonam-beauty-academy-design-refere.vercel.app/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

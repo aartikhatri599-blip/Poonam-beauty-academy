@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://poonam-beauty-academy-design-refere.vercel.app/sitemap.xml
