@@ -57,6 +57,13 @@ export function Footer({ links, courses }: { links: SiteLinks; courses: { title:
         </div>
         <div className="f-bottom">
           <span>© {new Date().getFullYear()} Poonam Beauty Academy, Sonipat</span>
+          {/* Dofollow credit links (no rel="nofollow") */}
+          <span className="made-by">
+            Made with <span aria-hidden="true">♥</span> by <b>Aarti Khatri</b> in association with{' '}
+            <a href="https://digitalmagician.in/" target="_blank" rel="noopener" title="Digital Magician – AI-First Digital Marketing Institute">Digital Magician</a>{' '}
+            &amp;{' '}
+            <a href="https://pehchaandigital.com/" target="_blank" rel="noopener" title="Pehchaan Digital – Get Your Business Found Online">Pehchaan Digital</a>
+          </span>
           <span><Link href="/contact">Privacy</Link></span>
         </div>
       </div>
